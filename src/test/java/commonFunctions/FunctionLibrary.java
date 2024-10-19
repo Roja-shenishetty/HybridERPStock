@@ -1,14 +1,22 @@
 package commonFunctions;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -48,12 +56,13 @@ public class FunctionLibrary {
 	}
 	
 	
-	public static void waitForElement(String ltype,String lvalue,String Tdata)
+	public static void waitForElement(String ltype,String lvalue,String Tdata) throws Throwable
 	{
 		WebDriverWait mywait=new WebDriverWait(driver, Duration.ofSeconds(Integer.parseInt(Tdata)));
 		
 		if(ltype.equalsIgnoreCase("xpath"))
 		{
+			Thread.sleep(2000);
 			mywait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(lvalue)));
 		}
 		if(ltype.equalsIgnoreCase("name"))
@@ -72,33 +81,39 @@ public class FunctionLibrary {
 	{
 		if(ltype.equalsIgnoreCase("xpath"))
 		{
+			driver.findElement(By.xpath(lvalue)).clear();
 			driver.findElement(By.xpath(lvalue)).sendKeys(Tdata);
 		}
 		if(ltype.equalsIgnoreCase("name"))
 		{
+			driver.findElement(By.name(lvalue)).clear();
 			driver.findElement(By.name(lvalue)).sendKeys(Tdata);
 		}
 		if(ltype.equalsIgnoreCase("id"))
 		{
+			driver.findElement(By.id(lvalue)).clear();
 			driver.findElement(By.id(lvalue)).sendKeys(Tdata);
 		}
 
 	}
 	
 	
-	public static void clickAction(String ltype,String lvalue)
+	public static void clickAction(String ltype,String lvalue) throws Throwable
 	{
 		if(ltype.equalsIgnoreCase("xpath"))
 		{
+			Thread.sleep(3000);
 			driver.findElement(By.xpath(lvalue)).click();
 		}
 		if(ltype.equalsIgnoreCase("name"))
 		{
+			Thread.sleep(3000);
 			driver.findElement(By.name(lvalue)).click();
 		}
 		if(ltype.equalsIgnoreCase("id"))
 		{
-			driver.findElement(By.id(lvalue)).click();
+			Thread.sleep(3000);
+			driver.findElement(By.id(lvalue)).sendKeys(Keys.ENTER);
 		}
 	}
 	
@@ -116,11 +131,85 @@ public class FunctionLibrary {
 	}
 	
 	
-	public static void closeBrowser()
+	public static void closeBrowser() throws Throwable
 	{
+		Thread.sleep(2000);
 		driver.quit();
 	}
 	
 	
-
+	public static void dropDownAction(String ltype,String lvalue,String tdata)
+	{
+		if(ltype.equalsIgnoreCase("xpath"))
+		{
+			int value=Integer.parseInt(tdata);
+			Select element=new Select(driver.findElement(By.xpath(lvalue)));
+			element.selectByIndex(value);
+		}
+		if(ltype.equalsIgnoreCase("name"))
+		{
+			int value=Integer.parseInt(tdata);
+			Select element=new Select(driver.findElement(By.name(lvalue)));
+			element.selectByIndex(value);
+		}
+		if(ltype.equalsIgnoreCase("id"))
+		{
+			int value=Integer.parseInt(tdata);
+			Select element=new Select(driver.findElement(By.id(lvalue)));
+			element.selectByIndex(value);
+		}
+		
+	}
+	
+	
+	public static void captureStock(String ltype,String lvalue) throws Throwable
+	{
+		String StockNum="";
+		if(ltype.equalsIgnoreCase("xpath"))
+		{
+			StockNum=driver.findElement(By.xpath(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("name"))
+		{
+			StockNum=driver.findElement(By.name(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("id"))
+		{
+			StockNum=driver.findElement(By.id(lvalue)).getAttribute("value");
+		}
+		
+		FileWriter fw=new FileWriter("./CaptureData/stockNum.txt");
+		BufferedWriter bw=new BufferedWriter(fw);
+		bw.write(StockNum);
+		bw.flush();
+		bw.close();
+	}
+	
+	
+	public static void stockTable() throws Throwable
+	{
+		
+		FileReader fr=new FileReader("./CaptureData/stockNum.txt");
+		BufferedReader br=new BufferedReader(fr);
+		String Exp_data=br.readLine();
+		
+		if(!driver.findElement(By.xpath(conpro.getProperty("searchText"))).isDisplayed())
+			driver.findElement(By.xpath(conpro.getProperty("searchIcon"))).click();
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).clear();
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).sendKeys(Exp_data);
+		driver.findElement(By.xpath(conpro.getProperty("searchBtn"))).click();
+		Thread.sleep(3000);
+		
+		String Act_data=driver.findElement(By.xpath("//table[@id='tbl_a_stock_itemslist']/tbody/tr[1]/td[8]/div/span/span")).getText();
+		Reporter.log(Act_data+"       "+Exp_data,true);
+		try {
+			Assert.assertEquals(Exp_data, Act_data,"StockNumber is not matching");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		
+		
+	}
+	
 }
