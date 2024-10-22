@@ -7,7 +7,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 import java.util.Properties;
 
 import org.openqa.selenium.By;
@@ -21,10 +24,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+
 public class FunctionLibrary {
 
 	public static WebDriver driver;
 	public static Properties conpro;
+	
 	
 	public static WebDriver startBrowser() throws Throwable
 	{
@@ -197,6 +204,7 @@ public class FunctionLibrary {
 			driver.findElement(By.xpath(conpro.getProperty("searchIcon"))).click();
 		driver.findElement(By.xpath(conpro.getProperty("searchText"))).clear();
 		driver.findElement(By.xpath(conpro.getProperty("searchText"))).sendKeys(Exp_data);
+		Thread.sleep(3000);
 		driver.findElement(By.xpath(conpro.getProperty("searchBtn"))).click();
 		Thread.sleep(3000);
 		
@@ -210,6 +218,111 @@ public class FunctionLibrary {
 		}
 		
 		
+		
 	}
+	
+	
+	public static void capturesup(String ltype,String lvalue) throws Throwable
+	{
+		String supplierNum="";
+		if(ltype.equalsIgnoreCase("xpath"))
+		{
+			supplierNum=driver.findElement(By.xpath(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("name"))
+		{
+			supplierNum=driver.findElement(By.name(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("id"))
+		{
+			supplierNum=driver.findElement(By.id(lvalue)).getAttribute("value");
+		}
+		
+		FileWriter fw=new FileWriter("./CaptureData/supplierNum.txt");
+		BufferedWriter bw=new BufferedWriter(fw);
+		bw.write(supplierNum);
+		bw.flush();
+		bw.close();
+		
+	}
+	
+	
+	public static void suppliertable() throws Throwable
+	{
+		FileReader fr=new FileReader("./CaptureData/supplierNum.txt");
+		BufferedReader br=new BufferedReader(fr);
+		String Exp_data=br.readLine();
+		if(!driver.findElement(By.xpath(conpro.getProperty("searchText"))).isDisplayed())
+			driver.findElement(By.xpath(conpro.getProperty("searchIcon"))).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).clear();
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).sendKeys(Exp_data);
+		driver.findElement(By.xpath(conpro.getProperty("searchBtn"))).click();
+		
+		String Act_data=driver.findElement(By.xpath("//table[@id='tbl_a_supplierslist']/tbody/tr[1]/td[6]/div/span/span")).getText();
+	    Reporter.log(Exp_data+"     "+Act_data,true);
+	    try {
+			Assert.assertEquals(Exp_data, Act_data,"supplier num not found");
+		} catch (AssertionError e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public static void capturecus(String ltype,String lvalue) throws Throwable
+	{
+		String customerNum="";
+		if(ltype.equalsIgnoreCase("xpath"))
+		{
+			customerNum=driver.findElement(By.xpath(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("name"))
+		{
+			customerNum=driver.findElement(By.name(lvalue)).getAttribute("value");
+		}
+		if(ltype.equalsIgnoreCase("id"))
+		{
+			customerNum=driver.findElement(By.id(lvalue)).getAttribute("value");
+		}
+		
+		FileWriter fw=new FileWriter("./CaptureData/customerNum.txt");
+		BufferedWriter bw=new BufferedWriter(fw);
+		bw.write(customerNum);
+		bw.flush();
+		bw.close();
+		
+	}
+	
+	
+	public static void customertable() throws Throwable
+	{
+		FileReader fr=new FileReader("./CaptureData/customerNum.txt");
+		BufferedReader br=new BufferedReader(fr);
+		String Exp_data=br.readLine();
+		if(!driver.findElement(By.xpath(conpro.getProperty("searchText"))).isDisplayed())
+			driver.findElement(By.xpath(conpro.getProperty("searchIcon"))).click();
+		
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).clear();
+		driver.findElement(By.xpath(conpro.getProperty("searchText"))).sendKeys(Exp_data);
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(conpro.getProperty("searchBtn"))).click();
+		String Act_data=driver.findElement(By.xpath("//table[@id='//table[@id='tbl_a_customerslist']/tbody/tr[1]/td[5]/div/span/span")).getText();
+	    Reporter.log(Exp_data+"     "+Act_data,true);
+	    try {
+			Assert.assertEquals(Exp_data, Act_data,"customer num not found");
+		} catch (AssertionError e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public static String generateDate()
+	{
+		Date date=new Date();
+		DateFormat df=new SimpleDateFormat("yyyy_mm_dd");
+		return df.format(date);
+	}
+	
 	
 }

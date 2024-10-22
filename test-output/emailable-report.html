@@ -9,17 +9,13 @@
 <table>
 <tr><th>Test</th><th># Passed</th><th># Skipped</th><th># Retried</th><th># Failed</th><th>Time (ms)</th><th>Included Groups</th><th>Excluded Groups</th></tr>
 <tr><th colspan="8">Default suite</th></tr>
-<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">5,259</td><td></td><td></td></tr>
+<tr><td><a href="#t0">Default test</a></td><td class="num">0</td><td class="num">0</td><td class="num">0</td><td class="num attn">1</td><td class="num">75,661</td><td></td><td></td></tr>
 </table>
-<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">driverFactory.AppTest</td><td><a href="#m0">kickStart</a></td><td rowspan="1">1729235379530</td><td rowspan="1">5114</td></tr></tbody>
+<table id='summary'><thead><tr><th>Class</th><th>Method</th><th>Start</th><th>Time (ms)</th></tr></thead><tbody><tr><th colspan="4">Default suite</th></tr></tbody><tbody id="t0"><tr><th colspan="4">Default test &#8212; failed</th></tr><tr class="failedeven"><td rowspan="1">driverFactory.AppTest</td><td><a href="#m0">kickStart</a></td><td rowspan="1">1729490566662</td><td rowspan="1">75518</td></tr></tbody>
 </table>
-<h2>Default test</h2><h3 id="m0">driverFactory.AppTest#kickStart</h3><table class="result"><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.io.FileNotFoundException: .\FileOutput\HybridResults.xlsx (The process cannot access the file because it is being used by another process)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:118)
-	at utilities.ExcelFileUtil.setCellData(ExcelFileUtil.java:88)
-	at driverFactory.DriverScript.startTest(DriverScript.java:78)
+<h2>Default test</h2><h3 id="m0">driverFactory.AppTest#kickStart</h3><table class="result"><tr><th>Messages</th></tr><tr><td><div class="messages">Supplier-00000005987     Supplier-00000004681</div></td></tr><tr><th>Exception</th></tr><tr><td><div class="stacktrace">java.lang.NullPointerException: Cannot invoke &quot;org.apache.poi.xssf.usermodel.XSSFSheet.getLastRowNum()&quot; because the return value of &quot;org.apache.poi.xssf.usermodel.XSSFWorkbook.getSheet(String)&quot; is null
+	at utilities.ExcelFileUtil.rowCount(ExcelFileUtil.java:29)
+	at driverFactory.DriverScript.startTest(DriverScript.java:26)
 	at driverFactory.AppTest.kickStart(AppTest.java:11)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)

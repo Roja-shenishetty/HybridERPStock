@@ -57,9 +57,9 @@ function toggleAllBoxes() {
 <tr>
 <td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Fri Oct 18 12:39:39 IST 2024</td>
+<td>Started on:</td><td>Mon Oct 21 11:32:46 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>5 seconds (5259 ms)</td>
+<tr><td>Total time:</td><td>75 seconds (75661 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -76,14 +76,17 @@ function toggleAllBoxes() {
 <td><b>Instance</b></td>
 </tr>
 <tr>
-<td title='driverFactory.AppTest.kickStart()'><b>kickStart</b><br>Test class: driverFactory.AppTest</td>
-<td><div><pre>java.io.FileNotFoundException: .\FileOutput\HybridResults.xlsx (The process cannot access the file because it is being used by another process)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:118)
-	at utilities.ExcelFileUtil.setCellData(ExcelFileUtil.java:88)
-	at driverFactory.DriverScript.startTest(DriverScript.java:78)
+<td title='driverFactory.AppTest.kickStart()'><b>kickStart</b><br>Test class: driverFactory.AppTest<br/>
+<a href="#Output-927159199" onClick='toggleBox("Output-927159199", this, "Show output", "Hide output");'>Show output</a>
+
+<a href="#Output-927159199" onClick="toggleAllBoxes();">Show all outputs</a>
+<div class='log' id="Output-927159199">
+Supplier-00000005987     Supplier-00000004681<br/>
+</div>
+</td>
+<td><div><pre>java.lang.NullPointerException: Cannot invoke &quot;org.apache.poi.xssf.usermodel.XSSFSheet.getLastRowNum()&quot; because the return value of &quot;org.apache.poi.xssf.usermodel.XSSFWorkbook.getSheet(String)&quot; is null
+	at utilities.ExcelFileUtil.rowCount(ExcelFileUtil.java:29)
+	at driverFactory.DriverScript.startTest(DriverScript.java:26)
 	at driverFactory.AppTest.kickStart(AppTest.java:11)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -111,14 +114,10 @@ function toggleAllBoxes() {
 	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-</pre></div><a href='#' onClick='toggleBox("stack-trace1776312161", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace1776312161'><pre>java.io.FileNotFoundException: .\FileOutput\HybridResults.xlsx (The process cannot access the file because it is being used by another process)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:118)
-	at utilities.ExcelFileUtil.setCellData(ExcelFileUtil.java:88)
-	at driverFactory.DriverScript.startTest(DriverScript.java:78)
+</pre></div><a href='#' onClick='toggleBox("stack-trace927159199", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace927159199'><pre>java.lang.NullPointerException: Cannot invoke &quot;org.apache.poi.xssf.usermodel.XSSFSheet.getLastRowNum()&quot; because the return value of &quot;org.apache.poi.xssf.usermodel.XSSFWorkbook.getSheet(String)&quot; is null
+	at utilities.ExcelFileUtil.rowCount(ExcelFileUtil.java:29)
+	at driverFactory.DriverScript.startTest(DriverScript.java:26)
 	at driverFactory.AppTest.kickStart(AppTest.java:11)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -147,8 +146,8 @@ function toggleAllBoxes() {
 	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
 	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
 </pre></div></td>
-<td>5</td>
-<td>driverFactory.AppTest@58cbafc2</td></tr>
+<td>75</td>
+<td>driverFactory.AppTest@7161d8d1</td></tr>
 </table><p>
 </body>
 </html>

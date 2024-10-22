@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\ROJA\AppData\Local\Temp\testng-eclipse-760872994\testng-customsuite.xml</span>
+                    <span>C:\Users\ROJA\AppData\Local\Temp\testng-eclipse--1899564633\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -129,13 +129,9 @@
                   <a name="kickStart">
                   </a> <!-- kickStart -->
                   <span class="method-name">kickStart</span>
-                  <div class="stack-trace">java.io.FileNotFoundException: .\FileOutput\HybridResults.xlsx (The process cannot access the file because it is being used by another process)
-	at java.base/java.io.FileOutputStream.open0(Native Method)
-	at java.base/java.io.FileOutputStream.open(FileOutputStream.java:289)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:230)
-	at java.base/java.io.FileOutputStream.&lt;init&gt;(FileOutputStream.java:118)
-	at utilities.ExcelFileUtil.setCellData(ExcelFileUtil.java:88)
-	at driverFactory.DriverScript.startTest(DriverScript.java:78)
+                  <div class="stack-trace">java.lang.NullPointerException: Cannot invoke &quot;org.apache.poi.xssf.usermodel.XSSFSheet.getLastRowNum()&quot; because the return value of &quot;org.apache.poi.xssf.usermodel.XSSFWorkbook.getSheet(String)&quot; is null
+	at utilities.ExcelFileUtil.rowCount(ExcelFileUtil.java:29)
+	at driverFactory.DriverScript.startTest(DriverScript.java:26)
 	at driverFactory.AppTest.kickStart(AppTest.java:11)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
@@ -172,7 +168,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\ROJA\AppData\Local\Temp\testng-eclipse-760872994\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\ROJA\AppData\Local\Temp\testng-eclipse--1899564633\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -181,7 +177,11 @@
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;driverFactory.AppTest&quot;/&gt;
+      &lt;class name=&quot;driverFactory.AppTest&quot;&gt;
+        &lt;methods&gt;
+          &lt;include name=&quot;kickStart&quot;/&gt;
+        &lt;/methods&gt;
+      &lt;/class&gt; &lt;!-- driverFactory.AppTest --&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -225,12 +225,12 @@ data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'kickStart')
 data.setCell(0, 2, 'driverFactory.AppTest')
-data.setCell(0, 3, 5114);
+data.setCell(0, 3, 75518);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 5 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -241,6 +241,12 @@ return data;
             <span class="header-content">Reporter output for Default suite</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
+            <div class="reporter-method-div">
+              <span class="reporter-method-name">kickStart</span>
+              <div class="reporter-method-output-div">
+                <span class="reporter-method-output">Supplier-00000005987     Supplier-00000004681</span>
+              </div> <!-- reporter-method-output-div -->
+            </div> <!-- reporter-method-div -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
         <div panel-name="ignored-methods-Default_suite" class="panel">
